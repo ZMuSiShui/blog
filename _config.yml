@@ -104,7 +104,7 @@ theme: melody
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repository: https://github.com/zhangjie-me/zhangjie-me.github.io
+  repository: git@github.com:zhangjie-me/zhangjie-me.github.io.git
   branch: master
 
 # Live2D
