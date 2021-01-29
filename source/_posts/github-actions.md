@@ -16,7 +16,7 @@ Hexo 提供了快速方便的一键部署功能，让您只需一条命令就能
 
 1. 首先在 _config.yml 文件中设置相关信息
 
-   ```yaml
+   ```Yaml
    # Deployment
    ## Docs: https://hexo.io/docs/one-command-deployment
    # 可以填写多个仓库
@@ -56,7 +56,7 @@ workflow 文件的配置字段非常多，详见[官方文档](https://help.gith
 
   `name` 字段是 workflow 的名称。如果省略该字段，默认为当前 workflow 的文件名。
 
-  ```
+  ```yaml
   name: Hexo deploy on Github Actions
   ```
 - `on`
