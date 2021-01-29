@@ -25,7 +25,7 @@ menu:
 
 # Favicon
 # ---------------
-favicon: /melody-favicon.ico
+favicon: /icon.png
 
 # PWA
 # See https://github.com/JLHwung/hexo-offline
@@ -292,9 +292,9 @@ canvas_ribbon:
 
 # Sidebar Settings
 # ---------------
-# links_title: Links
-# links:
-# Name: url
+links_title: Tools
+links:
+  Me: https://zhangjie.me
 
 # Follow Me Button
 # follow:
