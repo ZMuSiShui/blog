@@ -186,9 +186,9 @@ jobs:
 
 首先，我们需要两个仓库。一个用于存放我们博客的源码、另一个用于存放我们的博客编译后的数据
 
-![2021-01-29-01.png](https://qiyou_zhang_jie.gitee.io/blog/images/2021-01-29-01.png)
+![2021-01-29-01.png](/images/2021-01-29-01.png)
 
-![2021-01-29-02.png](https://qiyou_zhang_jie.gitee.io/blog/images/2021-01-29-02.png)
+![2021-01-29-02.png](/images/2021-01-29-02.png)
 
 git 相关的操作我们就略过哈！！！
 
