@@ -128,9 +128,9 @@ cdn:
 
 # Post info settings
 # ---------------
-avatar: https://qiyou_zhang_jie.gitee.io/blog/images/logo.png
+avatar: /images/logo.png
 
-top_img: https://zhangjie.me/res/blog-bg.jpg # false or url of img
+top_img: /images/blog-bg.jpg # false or url of img
 
 top_img_height: 60 # best range: 60 - 100
 
