@@ -18,7 +18,7 @@ curl(选项)(参数)
 
 ## 常用命令
 
-### 1. 查看网页源码
+### 查看网页源码
 
 直接在curl命令后加上网址，就可以看到网页源码。以百度为例：
 
@@ -36,7 +36,7 @@ curl(选项)(参数)
 λ curl -o [文件名] baidu.com
 ```
 
-### 2. 自动跳转
+### 自动跳转
 
 有的网址是自动跳转的，使用`-L`参数，curl就会跳转到新的网址。
 
@@ -46,7 +46,7 @@ curl(选项)(参数)
 
  www.sina.com会跳转到 www.sina.com.cn。
 
-### 3. 显示头信息
+### 显示头信息
 
 `-i`参数可以显示http response的头信息，连同网页代码一起。
 
@@ -88,7 +88,7 @@ Connection: Keep-Alive
 Content-Type: text/html
 ```
 
-### 4. 显示通信过程
+### 显示通信过程
 
 `-v`参数可以显示一次http通信的整个过程，包括端口连接和http request头信息。
 
@@ -136,7 +136,7 @@ Content-Type: text/html
 
 运行后，请打开output.txt文件查看。
 
-### 5. 发送表单信息
+### 发送表单信息
 
 发送表单信息有GET和POST两种方法。GET方法相对简单，只要把数据附在网址后面就行。
 
@@ -156,7 +156,7 @@ POST方法必须把数据和网址分开，curl就要用到--data参数。
 λ curl -X POST--data-urlencode "date=April 1" example.com/form.cgi
 ```
 
-### 6. HTTP动词
+### HTTP动词
 
 curl默认的HTTP动词是GET，使用`-X`参数可以支持其他动词。
 
@@ -168,7 +168,7 @@ curl默认的HTTP动词是GET，使用`-X`参数可以支持其他动词。
 λ curl -X DELETE www.example.com
 ```
 
-### 7. 文件上传
+### 文件上传
 
 假定文件上传的表单是下面这样：
 
@@ -185,7 +185,7 @@ curl默认的HTTP动词是GET，使用`-X`参数可以支持其他动词。
 λ curl --form upload=@localfilename --form press=OK [URL]
 ```
 
-### 8. Referer字段
+### Referer字段
 
 有时需要在http request头信息中，提供一个referer字段，表示是从哪里跳转过来的。
 
@@ -193,7 +193,7 @@ curl默认的HTTP动词是GET，使用`-X`参数可以支持其他动词。
 λ curl --referer http://www.example.com http://www.example.com
 ```
 
-### 9. User Agent字段
+### User Agent字段
 
 服务器有时会根据这个字段，针对不同设备，返回不同格式的网页，比如手机版和桌面版。
 
@@ -203,7 +203,7 @@ curl可以这样模拟：
 λ curl --user-agent "[User Agent]" [URL]
 ```
 
-### 10. cookie
+### cookie
 
 使用`--cookie`参数，可以让curl发送cookie。
 
@@ -220,7 +220,7 @@ curl可以这样模拟：
 λ curl -b cookies http://example.com
 ```
 
-### 11.  增加头信息
+### 增加头信息
 
 有时需要在http request之中，自行增加一个头信息。`--header`参数就可以起到这个作用。
 
@@ -228,7 +228,7 @@ curl可以这样模拟：
 λ curl --header "Content-Type:application/json" http://example.com
 ```
 
-### 12. HTTP认证
+### HTTP认证
 
 有些网域需要HTTP认证，这时curl需要用到`--user`参数。
 
