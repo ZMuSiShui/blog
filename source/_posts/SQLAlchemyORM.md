@@ -1,11 +1,11 @@
 ---
-title: SQLAlchemyORM
+title: SQLAlchemy ORM 学习笔记
 date: 2021-07-19 23:10:07
 tags:
-  - JavaScript
+  - Python
   - 学习笔记
 categories:
-  - JavaScript
+  - Python
 ---
 
 ## Object Relational Tutorial
