@@ -174,7 +174,8 @@ Session 是一个非常重要的概念，类似于iOS中的 NSManagedContext 的
 例如，创建一个查询来获取刚刚创建的用户。这个查询会返回一个和之前添加的用户相同的用户实例。
 
 ```python
->>> our_user = session.query(User).filter_by(name='ed').first() BEGIN (implicit)
+>>> our_user = session.query(User).filter_by(name='ed').first()
+BEGIN (implicit)
 INSERT INTO users (name, fullname, password) VALUES (?, ?, ?)
 ('ed', 'Ed Jones', 'edspassword')
 SELECT users.id AS users_id,
