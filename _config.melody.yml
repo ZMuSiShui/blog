@@ -52,7 +52,7 @@ highlight_theme: ocean
 # And you need to add the `fa` or `fab` prefix by your self.
 # ---------------
 social:
-  github fa: https://github.com/zhangjie-me
+  github fa: https://github.com/ZMuSiShui
   twitter fa: https://twitter.com/ZMuSiShui
 
 # Algolia search
@@ -294,7 +294,7 @@ canvas_ribbon:
 # ---------------
 links_title: Tools
 links:
-  Me: https://zhangjie.me
+  Me: https://musishui.me
   Github 下载加速: https://github.zmusishui.workers.dev
   Wiki 百科(中文): https://wiki.zmusishui.workers.dev
 
