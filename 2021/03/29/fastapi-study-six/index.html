@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="FastAPI(六)"><meta name="keywords" content="学习笔记,Python,FastAPI"><meta name="author" content="Jie"><meta name="copyright" content="Jie"><title>FastAPI(六) | JieのBlog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  hexoVersion: '5.3.0'
+} </script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="JieのBlog" type="application/atom+xml">
+</head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">响应状态码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8-HTTP-%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">常用 HTTP 状态码</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/images/logo.png"></div><div class="author-info__name text-center">Jie</div><div class="author-info__description text-center">记录点滴小事</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">19</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">9</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">4</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Tools</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://zhangjie.me">Me</a><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://github.zmusishui.workers.dev">Github 下载加速</a><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://wiki.zmusishui.workers.dev">Wiki 百科(中文)</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/images/blog-bg.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">JieのBlog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">FastAPI(六)</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2021-03-29</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python/">Python</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python/FastAPI/">FastAPI</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="响应状态码"><a href="#响应状态码" class="headerlink" title="响应状态码"></a>响应状态码</h2><p>在以下任意的路径操作中使用 <code>status_code</code> 参数来声明用于响应的 HTTP 状态码：</p>
+<ul>
+<li><code>@app.get()</code></li>
+<li><code>@app.post()</code></li>
+<li><code>@app.put()</code></li>
+<li><code>@app.delete()</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fastapi <span class="keyword">import</span> FastAPI</span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.post(<span class="params"><span class="string">&quot;/items/&quot;</span>, status_code=<span class="number">201</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">create_item</span>(<span class="params">name: <span class="built_in">str</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;name&quot;</span>: name&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>: <code>status_code</code> 是「装饰器」方法（<code>get</code>，<code>post</code> 等）的一个参数。它不属于路径操作函数。</p>
+<p><code>status_code</code> 参数接收一个表示 HTTP 状态码的数字。</p>
+<p><code>status_code</code> 也能够接收一个 <code>IntEnum</code> 类型，比如 Python 的 <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/http.html#http.HTTPStatus"><code>http.HTTPStatus</code></a></p>
+<h2 id="常用-HTTP-状态码"><a href="#常用-HTTP-状态码" class="headerlink" title="常用 HTTP 状态码"></a>常用 HTTP 状态码</h2><ul>
+<li><p><strong><code>100</code></strong> 接受的请求正在处理</p>
+</li>
+<li><p><strong><code>200</code></strong> 请求正常处理完毕</p>
+<ul>
+<li><code>200</code> <strong>：</strong>表示从客户端发送给服务器的请求被正常处理并返回；</li>
+<li><code>201</code> <strong>：</strong>表示客户端发送给客户端的请求得到了成功处理，但在返回的响应报文中不含实体的主体部分（没有资源可以返回）；</li>
+<li><code>204</code> <strong>：</strong>表示客户端进行了范围请求，并且服务器成功执行了这部分的GET请求，响应报文中包含由Content-Range指定范围的实体内容。</li>
+</ul>
+</li>
+<li><p><strong><code>300</code></strong> 需要进行附加操作以完成请求</p>
+<ul>
+<li><p><code>301</code> <strong>：</strong>永久性重定向，表示请求的资源被分配了新的URL，之后应使用更改的URL；</p>
+</li>
+<li><p><code>302</code> <strong>：</strong>临时性重定向，表示请求的资源被分配了新的URL，希望本次访问使用新的URL；</p>
+<p>301与302的区别：前者是永久移动，后者是临时移动（之后可能还会更改URL）</p>
+</li>
+<li><p><code>303</code> <strong>：</strong>表示请求的资源被分配了新的URL，应使用GET方法定向获取请求的资源；</p>
+<p>302与303的区别：后者明确表示客户端应当采用GET方式获取资源</p>
+</li>
+<li><p><code>304</code> <strong>：</strong>表示客户端发送附带条件（是指采用GET方法的请求报文中包含if-Match、If-Modified-Since、If-None-Match、If-Range、If-Unmodified-Since中任一首部）的请求时，服务器端允许访问资源，但是请求为满足条件的情况下返回改状态码；</p>
+</li>
+<li><p><code>307</code> <strong>：</strong>临时重定向，与303有着相同的含义，307会遵照浏览器标准不会从POST变成GET；（不同浏览器可能会出现不同的情况）；</p>
+</li>
+</ul>
+</li>
+<li><p><strong><code>400</code></strong> 客户端请求出错，服务器无法处理请求</p>
+<ul>
+<li><code>400</code> <strong>：</strong>表示请求报文中存在语法错误；</li>
+<li><code>401</code> <strong>：</strong>未经许可，需要通过HTTP认证；</li>
+<li><code>403</code> <strong>：</strong>服务器拒绝该次访问（访问权限出现问题）</li>
+<li><code>404</code> <strong>：</strong>表示服务器上无法找到请求的资源，除此之外，也可以在服务器拒绝请求但不想给拒绝原因时使用；</li>
+</ul>
+</li>
+<li><p><strong><code>500</code></strong> 服务器处理请求出错</p>
+<ul>
+<li><code>500</code> <strong>：</strong>表示服务器在执行请求时发生了错误，也有可能是web应用存在的bug或某些临时的错误时；</li>
+<li><code>503</code> <strong>：</strong>表示服务器暂时处于超负载或正在进行停机维护，无法处理请求；</li>
+</ul>
+</li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jie</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.zhangjie.me/2021/03/29/fastapi-study-six/">https://blog.zhangjie.me/2021/03/29/fastapi-study-six/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.zhangjie.me">JieのBlog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/FastAPI/">FastAPI</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2021/07/19/SQLAlchemyORM/"><i class="fa fa-chevron-left">  </i><span>SQLAlchemy ORM 学习笔记</span></a></div><div class="next-post pull-right"><a href="/2021/03/16/fastapi-study-five/"><span>FastAPI(五)</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == 'true';
+var verify = 'false' == 'true';
+var record_ip = 'false' == 'true';
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  recordIP:record_ip,
+  appId:'rWbNhLP6dd03QHWRmTsOzEyJ-9Nh9j0Va',
+  appKey:'xODfIUNMglVzANEwiXfChs82',
+  placeholder:'Just go go',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer class="footer-bg" style="background-image: url(/images/blog-bg.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2020 - 2021 By Jie</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" data-click="false"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"superSample":2,"width":210,"height":420,"position":"right","hOffset":0,"vOffset":-20},"log":false,"tagMode":false});</script></body></html>

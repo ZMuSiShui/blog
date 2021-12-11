@@ -1,0 +1,479 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="curl命令的使用"><meta name="keywords" content="Linux,CMD"><meta name="author" content="Jie"><meta name="copyright" content="Jie"><title>curl命令的使用 | JieのBlog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  hexoVersion: '5.3.0'
+} </script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="JieのBlog" type="application/atom+xml">
+</head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#curl"><span class="toc-number">1.</span> <span class="toc-text">curl</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%BD%91%E9%A1%B5%E6%BA%90%E7%A0%81"><span class="toc-number">3.1.</span> <span class="toc-text">查看网页源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E8%B7%B3%E8%BD%AC"><span class="toc-number">3.2.</span> <span class="toc-text">自动跳转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E5%A4%B4%E4%BF%A1%E6%81%AF"><span class="toc-number">3.3.</span> <span class="toc-text">显示头信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="toc-number">3.4.</span> <span class="toc-text">显示通信过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E8%A1%A8%E5%8D%95%E4%BF%A1%E6%81%AF"><span class="toc-number">3.5.</span> <span class="toc-text">发送表单信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E5%8A%A8%E8%AF%8D"><span class="toc-number">3.6.</span> <span class="toc-text">HTTP动词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">3.7.</span> <span class="toc-text">文件上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Referer%E5%AD%97%E6%AE%B5"><span class="toc-number">3.8.</span> <span class="toc-text">Referer字段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#User-Agent%E5%AD%97%E6%AE%B5"><span class="toc-number">3.9.</span> <span class="toc-text">User Agent字段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie"><span class="toc-number">3.10.</span> <span class="toc-text">cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E5%A4%B4%E4%BF%A1%E6%81%AF"><span class="toc-number">3.11.</span> <span class="toc-text">增加头信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E8%AE%A4%E8%AF%81"><span class="toc-number">3.12.</span> <span class="toc-text">HTTP认证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E9%A1%B9"><span class="toc-number">4.</span> <span class="toc-text">选项</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/images/logo.png"></div><div class="author-info__name text-center">Jie</div><div class="author-info__description text-center">记录点滴小事</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">19</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">9</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">4</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Tools</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://zhangjie.me">Me</a><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://github.zmusishui.workers.dev">Github 下载加速</a><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://wiki.zmusishui.workers.dev">Wiki 百科(中文)</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/images/blog-bg.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">JieのBlog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">curl命令的使用</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2021-02-24</time></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h2><p><a target="_blank" rel="noopener" href="http://curl.haxx.se/">curl命令</a> 是一个利用URL规则在命令行下工作的文件传输工具。它支持文件的上传和下载，所以是综合传输工具，但按传统，习惯称curl为下载工具。作为一款强力工具，curl支持包括HTTP、HTTPS、ftp等众多协议，还支持POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl(选项)(参数)</span><br></pre></td></tr></table></figure>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="查看网页源码"><a href="#查看网页源码" class="headerlink" title="查看网页源码"></a>查看网页源码</h3><p>直接在curl命令后加上网址，就可以看到网页源码。以百度为例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">λ curl baidu.com</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=http://www.baidu.com/&quot;&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>如果要把这个网页保存下来，可以使用<code>-o</code>参数，这就相当于使用wget命令了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl -o [文件名] baidu.com</span><br></pre></td></tr></table></figure>
+<h3 id="自动跳转"><a href="#自动跳转" class="headerlink" title="自动跳转"></a>自动跳转</h3><p>有的网址是自动跳转的，使用<code>-L</code>参数，curl就会跳转到新的网址。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl -L www.sina.com</span><br></pre></td></tr></table></figure>
+<p> <a target="_blank" rel="noopener" href="http://www.sina.com会跳转到/">www.sina.com会跳转到</a> <a target="_blank" rel="noopener" href="http://www.sina.com.cn./">www.sina.com.cn。</a></p>
+<h3 id="显示头信息"><a href="#显示头信息" class="headerlink" title="显示头信息"></a>显示头信息</h3><p><code>-i</code>参数可以显示http response的头信息，连同网页代码一起。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">λ curl -i baidu.com</span><br><span class="line"></span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Wed, 24 Feb 2021 13:22:34 GMT</span><br><span class="line">Server: Apache</span><br><span class="line">Last-Modified: Tue, 12 Jan 2010 13:48:00 GMT</span><br><span class="line">ETag: &quot;51-47cf7e6ee8400&quot;</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Content-Length: 81</span><br><span class="line">Cache-Control: max-age=86400</span><br><span class="line">Expires: Thu, 25 Feb 2021 13:22:34 GMT</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Content-Type: text/html</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=http://www.baidu.com/&quot;&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p><code>-I</code>参数则是只显示http response的头信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">λ curl -I baidu.com</span><br><span class="line"></span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Wed, 24 Feb 2021 13:23:37 GMT</span><br><span class="line">Server: Apache</span><br><span class="line">Last-Modified: Tue, 12 Jan 2010 13:48:00 GMT</span><br><span class="line">ETag: &quot;51-47cf7e6ee8400&quot;</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Content-Length: 81</span><br><span class="line">Cache-Control: max-age=86400</span><br><span class="line">Expires: Thu, 25 Feb 2021 13:23:37 GMT</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Content-Type: text/html</span><br></pre></td></tr></table></figure>
+<h3 id="显示通信过程"><a href="#显示通信过程" class="headerlink" title="显示通信过程"></a>显示通信过程</h3><p><code>-v</code>参数可以显示一次http通信的整个过程，包括端口连接和http request头信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">λ curl -v baidu.com</span><br><span class="line"></span><br><span class="line">* Rebuilt URL to: baidu.com/</span><br><span class="line">*   Trying 220.181.38.148...</span><br><span class="line">* TCP_NODELAY set</span><br><span class="line">* Connected to baidu.com (220.181.38.148) port 80 (#0)</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> GET / HTTP/1.1</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Host: baidu.com</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> User-Agent: curl/7.55.1</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Accept: */*</span></span><br><span class="line"><span class="meta">&gt;</span></span><br><span class="line"><span class="bash">&lt; HTTP/1.1 200 OK</span></span><br><span class="line">&lt; Date: Wed, 24 Feb 2021 13:24:27 GMT</span><br><span class="line">&lt; Server: Apache</span><br><span class="line">&lt; Last-Modified: Tue, 12 Jan 2010 13:48:00 GMT</span><br><span class="line">&lt; ETag: &quot;51-47cf7e6ee8400&quot;</span><br><span class="line">&lt; Accept-Ranges: bytes</span><br><span class="line">&lt; Content-Length: 81</span><br><span class="line">&lt; Cache-Control: max-age=86400</span><br><span class="line">&lt; Expires: Thu, 25 Feb 2021 13:24:27 GMT</span><br><span class="line">&lt; Connection: Keep-Alive</span><br><span class="line">&lt; Content-Type: text/html</span><br><span class="line">&lt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=http://www.baidu.com/&quot;&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">* Connection #0 to host baidu.com left intact</span><br></pre></td></tr></table></figure>
+<p>下面的命令可以查看更详细的通信过程</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl --trace output.txt baidu.com</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl --trace-ascii output.txt baidu.com</span><br></pre></td></tr></table></figure>
+<p>运行后，请打开output.txt文件查看。</p>
+<h3 id="发送表单信息"><a href="#发送表单信息" class="headerlink" title="发送表单信息"></a>发送表单信息</h3><p>发送表单信息有GET和POST两种方法。GET方法相对简单，只要把数据附在网址后面就行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl example.com/form.cgi?data=xxx</span><br></pre></td></tr></table></figure>
+<p>POST方法必须把数据和网址分开，curl就要用到–data参数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl -X POST --data &quot;data=xxx&quot; example.com/form.cgi</span><br></pre></td></tr></table></figure>
+<p>可以让curl为你编码，参数是<code>--data-urlencode</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl -X POST--data-urlencode &quot;date=April 1&quot; example.com/form.cgi</span><br></pre></td></tr></table></figure>
+<h3 id="HTTP动词"><a href="#HTTP动词" class="headerlink" title="HTTP动词"></a>HTTP动词</h3><p>curl默认的HTTP动词是GET，使用<code>-X</code>参数可以支持其他动词。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl -X POST www.example.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl -X DELETE www.example.com</span><br></pre></td></tr></table></figure>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><p>假定文件上传的表单是下面这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span> <span class="attr">enctype</span>=<span class="string">&#x27;multipart/form-data&#x27;</span> <span class="attr">action</span>=<span class="string">&quot;upload.cgi&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">file</span> <span class="attr">name</span>=<span class="string">upload</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">submit</span> <span class="attr">name</span>=<span class="string">press</span> <span class="attr">value</span>=<span class="string">&quot;OK&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以用curl这样上传文件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl --form upload=@localfilename --form press=OK [URL]</span><br></pre></td></tr></table></figure>
+<h3 id="Referer字段"><a href="#Referer字段" class="headerlink" title="Referer字段"></a>Referer字段</h3><p>有时需要在http request头信息中，提供一个referer字段，表示是从哪里跳转过来的。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl --referer http://www.example.com http://www.example.com</span><br></pre></td></tr></table></figure>
+<h3 id="User-Agent字段"><a href="#User-Agent字段" class="headerlink" title="User Agent字段"></a>User Agent字段</h3><p>服务器有时会根据这个字段，针对不同设备，返回不同格式的网页，比如手机版和桌面版。</p>
+<p>curl可以这样模拟：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl --user-agent &quot;[User Agent]&quot; [URL]</span><br></pre></td></tr></table></figure>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>使用<code>--cookie</code>参数，可以让curl发送cookie。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl --cookie &quot;name=xxx&quot; www.example.com</span><br></pre></td></tr></table></figure>
+<p>至于具体的cookie的值，可以从http response头信息的<code>Set-Cookie</code>字段中得到。</p>
+<p><code>-c cookie-file</code>可以保存服务器返回的cookie到文件，<code>-b cookie-file</code>可以使用这个文件作为cookie信息，进行后续的请求。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">λ curl -c cookies http://example.com</span><br><span class="line">λ curl -b cookies http://example.com</span><br></pre></td></tr></table></figure>
+<h3 id="增加头信息"><a href="#增加头信息" class="headerlink" title="增加头信息"></a>增加头信息</h3><p>有时需要在http request之中，自行增加一个头信息。<code>--header</code>参数就可以起到这个作用。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl --header &quot;Content-Type:application/json&quot; http://example.com</span><br></pre></td></tr></table></figure>
+<h3 id="HTTP认证"><a href="#HTTP认证" class="headerlink" title="HTTP认证"></a>HTTP认证</h3><p>有些网域需要HTTP认证，这时curl需要用到<code>--user</code>参数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ curl --user name:password example.com</span><br></pre></td></tr></table></figure>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a/–append</td>
+<td>上传文件时，附加到目标文件</td>
+</tr>
+<tr>
+<td>-A/–user-agent</td>
+<td>设置用户代理发送给服务器</td>
+</tr>
+<tr>
+<td>-anyauth</td>
+<td>可以使用“任何”身份验证方法</td>
+</tr>
+<tr>
+<td>-b/–cookie</td>
+<td>cookie字符串或文件读取位置</td>
+</tr>
+<tr>
+<td>–basic</td>
+<td>使用HTTP基本验证</td>
+</tr>
+<tr>
+<td>-B/–use-ascii</td>
+<td>使用ASCII /文本传输</td>
+</tr>
+<tr>
+<td>-c/–cookie-jar</td>
+<td>操作结束后把cookie写入到这个文件中</td>
+</tr>
+<tr>
+<td>-C/–continue-at</td>
+<td>断点续传</td>
+</tr>
+<tr>
+<td>-d/–data</td>
+<td>HTTP POST方式传送数据</td>
+</tr>
+<tr>
+<td>–data-ascii</td>
+<td>以ascii的方式post数据</td>
+</tr>
+<tr>
+<td>–data-binary</td>
+<td>以二进制的方式post数据</td>
+</tr>
+<tr>
+<td>–negotiate</td>
+<td>使用HTTP身份验证</td>
+</tr>
+<tr>
+<td>–digest</td>
+<td>使用数字身份验证</td>
+</tr>
+<tr>
+<td>–disable-eprt</td>
+<td>禁止使用EPRT或LPRT</td>
+</tr>
+<tr>
+<td>–disable-epsv</td>
+<td>禁止使用EPSV</td>
+</tr>
+<tr>
+<td>-D/–dump-header</td>
+<td>把header信息写入到该文件中</td>
+</tr>
+<tr>
+<td>–egd-file</td>
+<td>为随机数据(SSL)设置EGD socket路径</td>
+</tr>
+<tr>
+<td>–tcp-nodelay</td>
+<td>使用TCP_NODELAY选项</td>
+</tr>
+<tr>
+<td>-e/–referer</td>
+<td>来源网址</td>
+</tr>
+<tr>
+<td>-E/–cert</td>
+<td>客户端证书文件和密码 (SSL)</td>
+</tr>
+<tr>
+<td>–cert-type</td>
+<td>证书文件类型 (DER/PEM/ENG) (SSL)</td>
+</tr>
+<tr>
+<td>–key</td>
+<td>私钥文件名 (SSL)</td>
+</tr>
+<tr>
+<td>–key-type</td>
+<td>私钥文件类型 (DER/PEM/ENG) (SSL)</td>
+</tr>
+<tr>
+<td>–pass</td>
+<td>私钥密码 (SSL)</td>
+</tr>
+<tr>
+<td>–engine</td>
+<td>加密引擎使用 (SSL). “–engine list” for list</td>
+</tr>
+<tr>
+<td>–cacert</td>
+<td>CA证书 (SSL)</td>
+</tr>
+<tr>
+<td>–capath</td>
+<td>CA目录 (made using c_rehash) to verify peer against (SSL)</td>
+</tr>
+<tr>
+<td>–ciphers</td>
+<td>SSL密码</td>
+</tr>
+<tr>
+<td>–compressed</td>
+<td>要求返回是压缩的形势 (using deflate or gzip)</td>
+</tr>
+<tr>
+<td>–connect-timeout</td>
+<td>设置最大请求时间</td>
+</tr>
+<tr>
+<td>–create-dirs</td>
+<td>建立本地目录的目录层次结构</td>
+</tr>
+<tr>
+<td>–crlf</td>
+<td>上传是把LF转变成CRLF</td>
+</tr>
+<tr>
+<td>-f/–fail</td>
+<td>连接失败时不显示http错误</td>
+</tr>
+<tr>
+<td>–ftp-create-dirs</td>
+<td>如果远程目录不存在，创建远程目录</td>
+</tr>
+<tr>
+<td>–ftp-method [multicwd/nocwd/singlecwd]</td>
+<td>控制CWD的使用</td>
+</tr>
+<tr>
+<td>–ftp-pasv</td>
+<td>使用 PASV/EPSV 代替端口</td>
+</tr>
+<tr>
+<td>–ftp-skip-pasv-ip</td>
+<td>使用PASV的时候,忽略该IP地址</td>
+</tr>
+<tr>
+<td>–ftp-ssl</td>
+<td>尝试用 SSL/TLS 来进行ftp数据传输</td>
+</tr>
+<tr>
+<td>–ftp-ssl-reqd</td>
+<td>要求用 SSL/TLS 来进行ftp数据传输</td>
+</tr>
+<tr>
+<td>-F/–form</td>
+<td>模拟http表单提交数据</td>
+</tr>
+<tr>
+<td>–form-string</td>
+<td>模拟http表单提交数据</td>
+</tr>
+<tr>
+<td>-g/–globoff</td>
+<td>禁用网址序列和范围使用{}和[]</td>
+</tr>
+<tr>
+<td>-G/–get</td>
+<td>以get的方式来发送数据</td>
+</tr>
+<tr>
+<td>-H/–header</td>
+<td>自定义头信息传递给服务器</td>
+</tr>
+<tr>
+<td>–ignore-content-length</td>
+<td>忽略的HTTP头信息的长度</td>
+</tr>
+<tr>
+<td>-i/–include</td>
+<td>输出时包括protocol头信息</td>
+</tr>
+<tr>
+<td>-I/–head</td>
+<td>只显示请求头信息</td>
+</tr>
+<tr>
+<td>-j/–junk-session-cookies</td>
+<td>读取文件进忽略session cookie</td>
+</tr>
+<tr>
+<td>–interface</td>
+<td>使用指定网络接口/地址</td>
+</tr>
+<tr>
+<td>–krb4</td>
+<td>使用指定安全级别的krb4</td>
+</tr>
+<tr>
+<td>-k/–insecure</td>
+<td>允许不使用证书到SSL站点</td>
+</tr>
+<tr>
+<td>-K/–config</td>
+<td>指定的配置文件读取</td>
+</tr>
+<tr>
+<td>-l/–list-only</td>
+<td>列出ftp目录下的文件名称</td>
+</tr>
+<tr>
+<td>–limit-rate</td>
+<td>设置传输速度</td>
+</tr>
+<tr>
+<td>–local-port</td>
+<td>强制使用本地端口号</td>
+</tr>
+<tr>
+<td>-m/–max-time</td>
+<td>设置最大传输时间</td>
+</tr>
+<tr>
+<td>–max-redirs</td>
+<td>设置最大读取的目录数</td>
+</tr>
+<tr>
+<td>–max-filesize</td>
+<td>设置最大下载的文件总量</td>
+</tr>
+<tr>
+<td>-M/–manual</td>
+<td>显示全手动</td>
+</tr>
+<tr>
+<td>-n/–netrc</td>
+<td>从netrc文件中读取用户名和密码</td>
+</tr>
+<tr>
+<td>–netrc-optional</td>
+<td>使用 .netrc 或者 URL来覆盖-n</td>
+</tr>
+<tr>
+<td>–ntlm</td>
+<td>使用 HTTP NTLM 身份验证</td>
+</tr>
+<tr>
+<td>-N/–no-buffer</td>
+<td>禁用缓冲输出</td>
+</tr>
+<tr>
+<td>-o/–output</td>
+<td>把输出写到该文件中</td>
+</tr>
+<tr>
+<td>-O/–remote-name</td>
+<td>把输出写到该文件中，保留远程文件的文件名</td>
+</tr>
+<tr>
+<td>-p/–proxytunnel</td>
+<td>使用HTTP代理</td>
+</tr>
+<tr>
+<td>–proxy-anyauth</td>
+<td>选择任一代理身份验证方法</td>
+</tr>
+<tr>
+<td>–proxy-basic</td>
+<td>在代理上使用基本身份验证</td>
+</tr>
+<tr>
+<td>–proxy-digest</td>
+<td>在代理上使用数字身份验证</td>
+</tr>
+<tr>
+<td>–proxy-ntlm</td>
+<td>在代理上使用ntlm身份验证</td>
+</tr>
+<tr>
+<td>-P/–ftp-port</td>
+<td>使用端口地址，而不是使用PASV</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>作为第一个参数，关闭 .curlrc</td>
+</tr>
+<tr>
+<td>-Q/–quote</td>
+<td>文件传输前，发送命令到服务器</td>
+</tr>
+<tr>
+<td>-r/–range</td>
+<td>检索来自HTTP/1.1或FTP服务器字节范围</td>
+</tr>
+<tr>
+<td>–range-file</td>
+<td>读取（SSL）的随机文件</td>
+</tr>
+<tr>
+<td>-R/–remote-time</td>
+<td>在本地生成文件时，保留远程文件时间</td>
+</tr>
+<tr>
+<td>–retry</td>
+<td>传输出现问题时，重试的次数</td>
+</tr>
+<tr>
+<td>–retry-delay</td>
+<td>传输出现问题时，设置重试间隔时间</td>
+</tr>
+<tr>
+<td>–retry-max-time</td>
+<td>传输出现问题时，设置最大重试时间</td>
+</tr>
+<tr>
+<td>-s/–silent</td>
+<td>静默模式。不输出任何东西</td>
+</tr>
+<tr>
+<td>-S/–show-error</td>
+<td>显示错误</td>
+</tr>
+<tr>
+<td>–socks4</td>
+<td>用socks4代理给定主机和端口</td>
+</tr>
+<tr>
+<td>–socks5</td>
+<td>用socks5代理给定主机和端口</td>
+</tr>
+<tr>
+<td>–stderr</td>
+<td></td>
+</tr>
+<tr>
+<td>-t/–telnet-option</td>
+<td>Telnet选项设置</td>
+</tr>
+<tr>
+<td>–trace</td>
+<td>对指定文件进行debug</td>
+</tr>
+<tr>
+<td>–trace-ascii</td>
+<td>Like –跟踪但没有hex输出</td>
+</tr>
+<tr>
+<td>–trace-time</td>
+<td>跟踪/详细输出时，添加时间戳</td>
+</tr>
+<tr>
+<td>-T/–upload-file</td>
+<td>上传文件</td>
+</tr>
+<tr>
+<td>–url</td>
+<td>Spet URL to work with</td>
+</tr>
+<tr>
+<td>-u/–user</td>
+<td>设置服务器的用户和密码</td>
+</tr>
+<tr>
+<td>-U/–proxy-user</td>
+<td>设置代理用户名和密码</td>
+</tr>
+<tr>
+<td>-w/–write-out [format]</td>
+<td>什么输出完成后</td>
+</tr>
+<tr>
+<td>-x/–proxy</td>
+<td>在给定的端口上使用HTTP代理</td>
+</tr>
+<tr>
+<td>-X/–request</td>
+<td>指定什么命令</td>
+</tr>
+<tr>
+<td>-y/–speed-time</td>
+<td>放弃限速所要的时间，默认为30</td>
+</tr>
+<tr>
+<td>-Y/–speed-limit</td>
+<td>停止传输速度的限制，速度时间</td>
+</tr>
+</tbody></table>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jie</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.zhangjie.me/2021/02/24/curl/">https://blog.zhangjie.me/2021/02/24/curl/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.zhangjie.me">JieのBlog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/CMD/">CMD</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2021/03/10/fastapi-study-one/"><i class="fa fa-chevron-left">  </i><span>FastAPI(一) - 快速入门</span></a></div><div class="next-post pull-right"><a href="/2021/02/03/JavaScript-Learning-Notes-six/"><span>JavaScript 学习笔记(六)</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == 'true';
+var verify = 'false' == 'true';
+var record_ip = 'false' == 'true';
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  recordIP:record_ip,
+  appId:'rWbNhLP6dd03QHWRmTsOzEyJ-9Nh9j0Va',
+  appKey:'xODfIUNMglVzANEwiXfChs82',
+  placeholder:'Just go go',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer class="footer-bg" style="background-image: url(/images/blog-bg.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2020 - 2021 By Jie</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" data-click="false"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"superSample":2,"width":210,"height":420,"position":"right","hOffset":0,"vOffset":-20},"log":false,"tagMode":false});</script></body></html>
